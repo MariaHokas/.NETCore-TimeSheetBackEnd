@@ -20,20 +20,55 @@ namespace timeSheetBackEnd.Controllers
             List<Tunnit> tunnit = db.Tunnit.ToList();
             return tunnit;
         }
+        //// POST: api/Leimaus
+        //[HttpPost] //<--filtteri rajoittaa alapuolella olevan metodin vain POST-pyyntöihin (uuden asian luominen tai lisääminen)
+        //[Route("")] //<--tyhjä reitinmääritys (ei ole pakko laittaa), eli ei mitään lisättävää reittiin, jolloin
+        //public ActionResult PostCreateNew([FromBody] Tunnit tunti) //<-- [FromBody] tarkoittaa, että HTTP-pyynnön Body:ssä välitetään JSON-muodossa oleva objekti ,joka om Documentation-tyyppinen customer-niminen
+        //{
+        //    TuntiLeimausDBContext db = new TuntiLeimausDBContext();
+        //    try
+        //    {
+
+
+        //        _ = db.Tunnit.Add(tunti);
+        //        _ = db.SaveChanges();
+
+        //        return Ok(tunti.TunnitId);
+        //    }
+
+        //    catch (Exception)
+        //    {
+        //        return BadRequest("Jokin meni pieleen leimausta lisättäessä!?!?");
+        //    }
+
+        //    finally
+        //    {
+        //        db.Dispose();
+        //    }
+
+        //    /*return doku.DocumentationId.ToString; //k*//*uittaus Frontille, että päivitys meni oikein --> Frontti voi tsekata, että kontrolleri palauttaa saman id:n mitä käsitteli*/
+        //}
+
         // POST: api/Leimaus
         [HttpPost] //<--filtteri rajoittaa alapuolella olevan metodin vain POST-pyyntöihin (uuden asian luominen tai lisääminen)
-        [Route("")] //<--tyhjä reitinmääritys (ei ole pakko laittaa), eli ei mitään lisättävää reittiin, jolloin
-        public ActionResult PostCreateNew([FromBody] Tunnit tunti) //<-- [FromBody] tarkoittaa, että HTTP-pyynnön Body:ssä välitetään JSON-muodossa oleva objekti ,joka om Documentation-tyyppinen customer-niminen
+        [Route("sisaan")] //<--tyhjä reitinmääritys (ei ole pakko laittaa), eli ei mitään lisättävää reittiin, jolloin
+        public ActionResult PostSisaan([FromBody] Tunnit tunti) //<-- [FromBody] tarkoittaa, että HTTP-pyynnön Body:ssä välitetään JSON-muodossa oleva objekti ,joka om Documentation-tyyppinen customer-niminen
         {
             TuntiLeimausDBContext db = new TuntiLeimausDBContext();
             try
             {
+                Tunnit dbItem = new Tunnit()
 
+                {
+                    TunnitId = tunti.TunnitId,
+                    LuokkahuoneId = tunti.LuokkahuoneId,
+                    Sisaan = DateTime.Now,
+                };
 
-                _ = db.Tunnit.Add(tunti);
+                _ = db.Tunnit.Add(dbItem);
                 _ = db.SaveChanges();
 
-                return Ok(tunti.TunnitId);
+                return Ok(dbItem.TunnitId);
             }
 
             catch (Exception)
@@ -43,10 +78,47 @@ namespace timeSheetBackEnd.Controllers
 
             finally
             {
+
                 db.Dispose();
             }
 
             /*return doku.DocumentationId.ToString; //k*//*uittaus Frontille, että päivitys meni oikein --> Frontti voi tsekata, että kontrolleri palauttaa saman id:n mitä käsitteli*/
         }
+        //// POST: api/Leimaus
+        //[HttpPost] //<--filtteri rajoittaa alapuolella olevan metodin vain POST-pyyntöihin (uuden asian luominen tai lisääminen)
+        //[Route("sisaan")] //<--tyhjä reitinmääritys (ei ole pakko laittaa), eli ei mitään lisättävää reittiin, jolloin
+        //public ActionResult Ulos([FromBody] Tunnit tunti) //<-- [FromBody] tarkoittaa, että HTTP-pyynnön Body:ssä välitetään JSON-muodossa oleva objekti ,joka om Documentation-tyyppinen customer-niminen
+        //{
+        //    TuntiLeimausDBContext db = new TuntiLeimausDBContext();
+        //    try
+        //    {
+        //        Tunnit dbItem = new Tunnit()
+
+        //        {
+        //            TunnitId = tunti.TunnitId,
+        //            LuokkahuoneId = tunti.LuokkahuoneId,
+        //            Sisaan = DateTime.Now,
+        //        };
+
+        //        _ = db.Tunnit.Add(dbItem);
+        //        _ = db.SaveChanges();
+
+        //        return Ok(dbItem.TunnitId);
+        //    }
+
+        //    catch (Exception)
+        //    {
+        //        return BadRequest("Jokin meni pieleen leimausta lisättäessä!?!?");
+        //    }
+
+        //    finally
+        //    {
+
+        //        db.Dispose();
+        //    }
+
+        //    /*return doku.DocumentationId.ToString; //k*//*uittaus Frontille, että päivitys meni oikein --> Frontti voi tsekata, että kontrolleri palauttaa saman id:n mitä käsitteli*/
+        //}
+
     }
 }

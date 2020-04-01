@@ -188,10 +188,15 @@ namespace timeSheetBackEnd.Models
 
                 entity.Property(e => e.LuokkahuoneId)
                     .HasColumnName("LuokkahuoneID")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(4);
+
+                entity.Property(e => e.OppilasId)
+                    .HasColumnName("OppilasID")
+                    .HasMaxLength(128);
 
                 entity.Property(e => e.Sisaan).HasColumnType("datetime");
+
+                entity.Property(e => e.Ulos).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<TuntiRaportti>(entity =>

@@ -14,11 +14,14 @@ namespace timeTrackingSystemBackend.Services
         User Create(User user, string password);
         void Update(User user, string password = null);
         void Delete(int id);
+        string GetById();
     }
 
     public class UserService : IUserService
     {
         private DataContext _context;
+
+        public static object Identity { get; internal set; }
 
         public UserService(DataContext context)
         {
@@ -157,6 +160,11 @@ namespace timeTrackingSystemBackend.Services
             }
 
             return true;
+        }
+
+        public string GetById()
+        {
+            throw new NotImplementedException();
         }
     }
 }

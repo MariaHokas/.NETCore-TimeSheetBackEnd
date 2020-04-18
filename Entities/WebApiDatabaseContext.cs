@@ -48,6 +48,11 @@ namespace timeTrackingSystemBackend.Entities
                 entity.Property(e => e.Ulos).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 

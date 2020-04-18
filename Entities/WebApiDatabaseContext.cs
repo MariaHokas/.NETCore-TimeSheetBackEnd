@@ -36,12 +36,11 @@ namespace timeTrackingSystemBackend.Entities
                 entity.Property(e => e.TunnitId).HasColumnName("TunnitID");
 
                 entity.Property(e => e.LuokkahuoneId)
+                    .IsRequired()
                     .HasColumnName("LuokkahuoneID")
                     .HasMaxLength(4);
 
-                entity.Property(e => e.OppilasId)
-                    .HasColumnName("OppilasID")
-                    .HasMaxLength(128);
+                entity.Property(e => e.OppilasId).HasColumnName("OppilasID");
 
                 entity.Property(e => e.Sisaan).HasColumnType("datetime");
 
@@ -50,7 +49,9 @@ namespace timeTrackingSystemBackend.Entities
 
             modelBuilder.Entity<Users>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedNever();
             });
 
             OnModelCreatingPartial(modelBuilder);

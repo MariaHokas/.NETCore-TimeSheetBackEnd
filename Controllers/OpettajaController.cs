@@ -114,16 +114,16 @@ namespace timeTrackingSystemBackend.Controllers
         [HttpGet]
         [Route("R")]
 
-        public IActionResult GetSomeTunnit(int offset, int limit, string oppilasid)
+        public IActionResult GetSomeTunnit(int offset, int limit, int oppilasid)
         {
-            if (oppilasid != null)
-            {
-                WebApiDatabaseContext db = new WebApiDatabaseContext();
-                List<Tunnit> leimaukset = db.Tunnit.Where(d => d.OppilasId == oppilasid).ToList();
-                return Ok(leimaukset);
-            }
+            //if (oppilasid != null)
+            //{
+            //    WebApiDatabaseContext db = new WebApiDatabaseContext();
+            //    List<Tunnit> leimaukset = db.Tunnit.Where(d => d.OppilasId == oppilasid).ToList();
+            //    return Ok(leimaukset);
+            //}
 
-            else
+            //else
             {
                 WebApiDatabaseContext db = new WebApiDatabaseContext();
                 var model = (from c in db.Tunnit

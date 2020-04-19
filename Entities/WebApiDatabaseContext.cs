@@ -40,11 +40,20 @@ namespace timeTrackingSystemBackend.Entities
                     .HasColumnName("LuokkahuoneID")
                     .HasMaxLength(4);
 
-                entity.Property(e => e.OppilasId).HasColumnName("OppilasID");
+                entity.Property(e => e.OppilasId)
+                    .HasColumnName("OppilasID")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Sisaan).HasColumnType("datetime");
 
                 entity.Property(e => e.Ulos).HasColumnType("datetime");
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Tunnit)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_tunnit_Users");
             });
 
             modelBuilder.Entity<Users>(entity =>
